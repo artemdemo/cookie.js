@@ -1,0 +1,24 @@
+{
+  "name": "cookie_js",
+  "version": "1.0.0",
+  "description": "cookie.js is a tiny JavaScript library that simplifies cookies",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemdemo/cookie.js.git"
+  },
+  "keywords": [
+    "cookie"
+  ],
+  "author": "Artem Demo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artemdemo/cookie.js/issues"
+  },
+  "homepage": "https://github.com/artemdemo/cookie.js#readme"
+}
