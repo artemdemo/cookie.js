@@ -15,7 +15,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'source/*.es6',
+            'source/cookie.es6',
             'test/*.spec.es6'
         ],
 
@@ -27,7 +27,7 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'source/*.es6': ['browserify'],
+            'source/cookie.es6': ['browserify'],
             'test/*.es6': ['browserify']
         },
 
