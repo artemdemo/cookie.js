@@ -5,8 +5,8 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 
 // Browserify and all modules that I need with it
-var source = require('vinyl-source-stream'),
-    buffer = require('vinyl-buffer'),
+var vinylSource = require('vinyl-source-stream'),
+    vinylBuffer = require('vinyl-buffer'),
     watchify = require('watchify'),
     browserify = require('browserify'),
     babelify = require('babelify');
@@ -27,8 +27,13 @@ function compile_example(watch) {
     function rebundle() {
         bundler.bundle()
             .on('error', function(err) { console.error(err); this.emit('end'); })
-            .pipe(source('example.js'))
-            .pipe(buffer())
+
+            // Now I need to convert browserify file stream into gulp stream, vinyl plugins will do it
+            // @source http://stackoverflow.com/a/30851219
+            .pipe(vinylSource('example.js'))
+            .pipe(vinylBuffer())
+
+            // Completing the process
             .pipe(sourcemaps.init({ loadMaps: true }))
             .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest('./example'));
