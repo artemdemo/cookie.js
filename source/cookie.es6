@@ -40,6 +40,12 @@ export let cookie = (() => {
     /**
      * Main module object
      * @type {*}
+     * @note
+     * Why I'm using 'function() {}' instead of 'Arrow function' ?
+     * Pay attention that I'm using 'arrow function' _AND_ regular function declaration with 'function() {}'
+     * It's not an accident. 'Arrow function' will keep 'this' of outer scope and in this case it wouldn't be
+     * the main 'cookie' object as you hope. It will be global 'this' and in case of module it will get 'undefined'
+     * @source https://github.com/babel/babel/issues/562#issuecomment-70914673
      */
     let cookie = {
 
@@ -75,8 +81,10 @@ export let cookie = (() => {
          *    cookie.set('key', 'value', {
          *       expires: 7, // expires in one week
          *    });
+         * @note
+         * Yes, I'm using 'function() {}' instead of 'Arrow function', see explanation above
          */
-        set: (key, value, userOptions) => {
+        set: function (key, value, userOptions) {
             if (helpers.isPlainObject(key)) {
                 // `key` contains an object with keys and values for cookies, `value` contains the options object.
 
@@ -110,7 +118,16 @@ export let cookie = (() => {
             return this; // Return the `cookie` object to make chaining possible.
         },
 
-        setDefault: (key, value, options) => {
+        /**
+         *
+         * @param key
+         * @param value
+         * @param options
+         * @returns {*}
+         * @note
+         * Yes, I'm using 'function() {}' instead of 'Arrow function', see explanation above
+         */
+        setDefault: function (key, value, options) {
             if (helpers.isPlainObject(key)) {
                 for (let k in key) {
                     if (key.hasOwnProperty(k) && this.get(k) === undefined) this.set(k, key[k], value);
@@ -121,19 +138,41 @@ export let cookie = (() => {
             }
         },
 
-        remove: (...keyArguments) => {
+        /**
+         *
+         * @param keyArguments
+         * @returns {cookie} - Return the `cookie` object to make chaining possible.
+         * @note
+         * Yes, I'm using 'function() {}' instead of 'Arrow function', see explanation above
+         */
+        remove: function (...keyArguments) {
             let keys = Array.isArray(keyArguments[0]) ? keyArguments[0] : keyArguments;
 
             for (let i = 0, len = keys.length; i < len; i++) {
                 this.set(keys[i], '', -1);
             }
 
-            return this; // Return the `cookie` object to make chaining possible.
+            return this;
         },
 
-        empty: () => this.remove(Object.keys(this.all())),
+        /**
+         * Remove all cookies
+         * @note
+         * Yes, I'm using 'function() {}' instead of 'Arrow function', see explanation above
+         */
+        empty: function () {
+            this.remove(Object.keys(this.all()))
+        },
 
-        get: (keys, fallback) => {
+        /**
+         *
+         * @param keys
+         * @param fallback
+         * @returns {*}
+         * @note
+         * Yes, I'm using 'function() {}' instead of 'Arrow function', see explanation above
+         */
+        get: function (keys, fallback) {
             let cookies = this.all();
 
             if (Array.isArray(keys)) {
@@ -150,6 +189,10 @@ export let cookie = (() => {
             return helpers.retrieve(cookies[keys], fallback);
         },
 
+        /**
+         * Returns objet with all available cookie
+         * @returns {{}}
+         */
         all: () => {
             if (document.cookie === '') return {};
 
@@ -165,12 +208,16 @@ export let cookie = (() => {
             return result;
         },
 
+        /**
+         * Check whether cookies are enabled in the browser
+         * @returns {boolean}
+         */
         enabled: () => {
             if (navigator.cookieEnabled) return true;
 
-            let ret = cookie.set('_', '_').get('_') === '_';
+            let result = cookie.set('_', '_').get('_') === '_';
             cookie.remove('_');
-            return ret;
+            return result;
         }
     };
 
