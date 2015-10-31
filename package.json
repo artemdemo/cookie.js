@@ -40,8 +40,10 @@
     "babel-preset-es2015": "^6.0.14",
     "babelify": "^7.0.1",
     "browserify": "^12.0.1",
+    "del": "^2.0.2",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.0.0",
+    "gulp-requirejs": "^0.1.3",
     "gulp-shell": "^0.5.1",
     "gulp-sourcemaps": "^1.6.0",
     "jasmine-core": "^2.3.4",
@@ -58,5 +60,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"
+  },
+  "dependencies": {
+    "requirejs": "^2.1.20"
   }
 }

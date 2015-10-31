@@ -21,7 +21,7 @@ var shell = require('gulp-shell');
  * Compile example file, incl cookie.js library
  * @param watch {boolean}
  */
-function compile_example(watch) {
+function compile_example_bowserify(watch) {
     var bundler = watchify(browserify('./source/example.es6', { debug: true }).transform(babelify));
 
     function rebundle() {
@@ -36,7 +36,7 @@ function compile_example(watch) {
             // Completing the process
             .pipe(sourcemaps.init({ loadMaps: true }))
             .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest('./example'));
+            .pipe(gulp.dest('./example/browserify'));
     }
 
     if (watch) {
@@ -53,9 +53,15 @@ function compile_example(watch) {
  * Run compile example with watcher
  * @returns {*}
  */
-function watch() {
-    return compile_example(true);
+function watch_example_browserify() {
+    return compile_example_bowserify(true);
 }
+
+/**
+ * Compile example AND watch changes for it
+ */
+gulp.task('compile_example_bowserify', function() { return compile_example_bowserify(); });
+gulp.task('watch_example_browserify', function() { return watch_example_browserify(); });
 
 /**
  * 'Build task'
@@ -78,17 +84,14 @@ gulp.task('karma', shell.task([
     './node_modules/karma/bin/karma start'
 ]));
 
-/**
- * Compile example AND watch changes for it
- */
-gulp.task('compile_example', function() { return compile_example(); });
-gulp.task('watch', function() { return watch(); });
 
 /**
- * Default task
+ * Build browserify example
  * Watch files and run compile example
  */
-gulp.task('default', ['watch']);
+gulp.task('browserify', ['watch_example_browserify']);
+
+gulp.task('default', ['compile_example_bowserify']);
 
 /**
  * Run kama tests
