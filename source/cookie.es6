@@ -139,7 +139,7 @@ export let cookie = (() => {
         },
 
         /**
-         *
+         * Remove cookie by its key value
          * @param keyArguments
          * @returns {cookie} - Return the `cookie` object to make chaining possible.
          * @note
@@ -165,7 +165,8 @@ export let cookie = (() => {
         },
 
         /**
-         *
+         * Get cookie value by its key.
+         * If there is no cookie will return 'fallback' value
          * @param keys
          * @param fallback
          * @returns {*}
