@@ -21,10 +21,16 @@ I'm using gulp to manage all tasks.
 $ gulp build
 ```
 
-### Build example with browserify and watch
+### Build browserify example
 
 ```
-$ gulp
+$ gulp browserify
+```
+
+### Build amd (requirejs) example
+
+```
+$ gulp requirejs
 ```
 
 ### Tests

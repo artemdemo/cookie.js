@@ -1,4 +1,4 @@
-import {cookie} from './cookie.es6'
+import {cookie} from './cookie.es6.js'
 
 if (cookie.enabled()) {
     console.log('Cookie enabled');

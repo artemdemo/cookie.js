@@ -1,4 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -158,7 +157,7 @@ var cookie = exports.cookie = (function () {
         },
 
         /**
-         *
+         * Remove cookie by its key value
          * @param keyArguments
          * @returns {cookie} - Return the `cookie` object to make chaining possible.
          * @note
@@ -188,7 +187,8 @@ var cookie = exports.cookie = (function () {
         },
 
         /**
-         *
+         * Get cookie value by its key.
+         * If there is no cookie will return 'fallback' value
          * @param keys
          * @param fallback
          * @returns {*}
@@ -246,23 +246,3 @@ var cookie = exports.cookie = (function () {
 
     return cookie;
 })();
-
-},{}],2:[function(require,module,exports){
-'use strict';
-
-var _cookie = require('./cookie.es6.js');
-
-if (_cookie.cookie.enabled()) {
-    console.log('Cookie enabled');
-
-    _cookie.cookie.set('my-name', 'artem');
-
-    console.log(_cookie.cookie.all());
-} else {
-    console.error('Cookie is not enabled in your browser');
-}
-
-},{"./cookie.es6":1}]},{},[2])
-
-
-//# sourceMappingURL=example.es6.js.map

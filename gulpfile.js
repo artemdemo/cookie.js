@@ -1,16 +1,19 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
+var prompt = require('gulp-prompt');
 
-require('./gulp/karma');
+
+require('./gulp/amd');
 require('./gulp/browserify');
+require('./gulp/karma');
 
 /**
  * 'Build task'
- * Will build cookie.js library only
+ * Will build cookie.es6.js library only
  */
 gulp.task('build', function () {
-    return gulp.src('source/cookie.es6')
+    return gulp.src('source/cookie.es6.js')
         .pipe(sourcemaps.init())
         .pipe(babel({
             presets: ['babel-preset-es2015']
@@ -20,15 +23,21 @@ gulp.task('build', function () {
 });
 
 
-/**
- * Build browserify example
- * Watch files and run compile example
- */
-gulp.task('browserify', ['watch_example_browserify']);
-
-gulp.task('default', ['compile_example_bowserify']);
-
-/**
- * Run kama tests
- */
+gulp.task('amd', ['compile-amd']);
+gulp.task('browserify', ['compile-browserify']);
 gulp.task('test', ['karma']);
+
+
+gulp.task('default', function(){
+    gulp.src('gulpfile.js')
+        .pipe(prompt.prompt({
+            type: 'checkbox',
+            name: 'tasks',
+            message: 'Which tasks to run? (use "space" key to select tasks)',
+            choices: ['browserify', 'amd', 'test']
+        }, function(res){
+            res.tasks.forEach(function(task) {
+                gulp.start(task);
+            });
+        }));
+});

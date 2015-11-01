@@ -245,4 +245,4 @@ var cookie = exports.cookie = (function () {
 
     return cookie;
 })();
-//# sourceMappingURL=cookie.js.map
+//# sourceMappingURL=cookie.es6.js.map

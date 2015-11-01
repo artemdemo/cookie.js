@@ -158,7 +158,7 @@ var cookie = exports.cookie = (function () {
         },
 
         /**
-         *
+         * Remove cookie by its key value
          * @param keyArguments
          * @returns {cookie} - Return the `cookie` object to make chaining possible.
          * @note
@@ -188,7 +188,8 @@ var cookie = exports.cookie = (function () {
         },
 
         /**
-         *
+         * Get cookie value by its key.
+         * If there is no cookie will return 'fallback' value
          * @param keys
          * @param fallback
          * @returns {*}
@@ -250,19 +251,19 @@ var cookie = exports.cookie = (function () {
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var _cookie = require('./cookie.es6.js');
+var _cookieEs = require('./cookie.es6.js');
 
-if (_cookie.cookie.enabled()) {
+if (_cookieEs.cookie.enabled()) {
     console.log('Cookie enabled');
 
-    _cookie.cookie.set('my-name', 'artem');
+    _cookieEs.cookie.set('my-name', 'artem');
 
-    console.log(_cookie.cookie.all());
+    console.log(_cookieEs.cookie.all());
 } else {
     console.error('Cookie is not enabled in your browser');
 }
 
-},{"./cookie.es6":1}]},{},[2])
+},{"./cookie.es6.js":1}]},{},[2])
 
 
 //# sourceMappingURL=example.es6.js.map

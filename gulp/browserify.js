@@ -11,11 +11,11 @@ var vinylSource = require('vinyl-source-stream'),
 var sourcemaps = require('gulp-sourcemaps');
 
 /**
- * Compile example file, incl cookie.js library
+ * Compile example file, incl cookie.es6.js library
  * @param watch {boolean}
  */
 function compile_example_bowserify(watch) {
-    var bundler = watchify(browserify('./source/example.es6', { debug: true }).transform(babelify));
+    var bundler = watchify(browserify('./source/example.es6.js', { debug: true }).transform(babelify));
 
     function rebundle() {
         bundler.bundle()
@@ -23,7 +23,7 @@ function compile_example_bowserify(watch) {
 
             // Now I need to convert browserify file stream into gulp stream, vinyl plugins will do it
             // @source http://stackoverflow.com/a/30851219
-            .pipe(vinylSource('example.js'))
+            .pipe(vinylSource('example.es6.js'))
             .pipe(vinylBuffer())
 
             // Completing the process
@@ -53,7 +53,7 @@ function watch_example_browserify() {
 /**
  * Compile example AND watch changes for it
  */
-gulp.task('compile_example_bowserify', function() { return compile_example_bowserify(); });
-gulp.task('watch_example_browserify', function() { return watch_example_browserify(); });
+gulp.task('bowserify-without-watch', function() { return compile_example_bowserify(); });
+gulp.task('compile-browserify', function() { return watch_example_browserify(); });
 
 

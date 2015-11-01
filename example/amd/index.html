@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cookie.js example - Browserify</title>
+    <title>Cookie.js example - RequireJS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
 
@@ -16,7 +16,7 @@
 
 <div class="row">
     <div class="large-12 columns">
-        <h3 class="subheader">Cookie.js example - Browserify</h3>
+        <h3 class="subheader">Cookie.js example - RequireJS</h3>
     </div>
 </div>
 
@@ -57,7 +57,10 @@
     </div>
 </div>
 
-<script src="example.js"></script>
+<script src="../../node_modules/requirejs/require.js"></script>
+<script>
+    requirejs(['example.es6']);
+</script>
 
 </body>
 </html>

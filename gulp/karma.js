@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 
-// Run shell commands (for karma)
 var shell = require('gulp-shell');
 
 /**
